@@ -1,4 +1,5 @@
 import UploadImage from './UploadImage';
+import SetImage from './SetImage';
 
 const Detection = () => {
   return (
@@ -15,17 +16,17 @@ const Detection = () => {
       <div className="content-detail">
         <h1>물체 검출</h1>
         <p>
-          Image Detection은 ~~<br></br>
-          부가사항
+          Image Detection은 ~~
         </p>
         <div className="demo-visual">
           <div className="box_com image">
             <p>
-              2MB 이하의 이미지를 올리거나<br></br>
+              2MB 이하의 이미지를 올리거나
+              <br />
               샘플을 선택해 결과를 확인해 보세요.
             </p>
             <button className="btn-q">샘플테스트</button>
-            <UploadImage />
+            <SetImage />
           </div>
           <div className="box_com code">
             <ul className="code-select">

@@ -28,6 +28,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  border-radius: 10px 10px 10px 10px;
   color: #000;
   text-decoration: none;
 }
@@ -226,9 +227,7 @@ div.content-detail {
 }
 
 .box_com.image {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: inline-block;
   align-items: center;
   text-align: center;
   width: 658px;
@@ -238,17 +237,38 @@ div.content-detail {
 
 .box_com.image p {
   font-size: 3.5rem;
+  font-family: "NEXONLv1GothicLight";
   color: darkgray;
 }
 
 .btn-q {
-  width: 146px;
-  height: 46px;
+  width: 140px;
+  height: 45px;
   background-color: black;
   color: white;
   font-size: medium;
+  font-family: "NEXONLv1GothicLight";
+  padding: 10px;
   margin-top: 28px;
+  border: 0px;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+label.btn-q {
+  padding: 13px 37px;
+  margin-left: 20px;
+}
+
+.show-image {
+  width: 658px;
+  height: 678px;
+}
+
+.show-image img {
+  width: 658px;
+  height: 678px;
+  object-fit: contain;
 }
 
 .box_com.code {
@@ -273,6 +293,13 @@ div.content-detail {
   font-size: 3rem;
   border: 0;
   background-color: white;
+}
+
+.input-file-button {
+  background-color: #FF6600;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
 }
 
 html {
