@@ -11,10 +11,10 @@ app = Flask(__name__)
 def classfy(source=None, save_img=True):
     source_bucket = s3_access.get_s3_bucket()
 
-    file_path = os.path.join('Imageclassfication', source)
+    file_path = os.path.join('/app', source)
     s3_access.download_file(source_bucket, source, file_path)
 
-    model = torch.load('./Imageclassfication/' + 'classfications')
+    model = torch.load('/app/classfications')
     # source = img.jpg
     Model_input_image = file_path
 
@@ -27,7 +27,7 @@ def classfy(source=None, save_img=True):
     # print(img.shape) # torch.Size([1, 3, 224, 224])
 
     # Load ImageNet class names
-    labels_map = json.load(open('./sample/labels_map.txt'))
+    labels_map = json.load(open('/app/sample/labels_map.txt'))
     labels_map = [labels_map[str(i)] for i in range(1000)]
 
 
@@ -48,7 +48,7 @@ def classfy(source=None, save_img=True):
         save_dict["result"]["conf"].append(object_dicts[idx])
         # print('{label:<75} ({p:.2f}%)'.format(label=labels_map[idx], p=prob * 100))
     json_file_name = "classfy" + "_output.json"
-    json_save_path = os.path.join('Imageclassfication',json_file_name)
+    json_save_path = os.path.join('/app',json_file_name)
     with open(json_save_path, "w", encoding="utf-8") as f:
         json.dump(save_dict, f, ensure_ascii=False)
 
@@ -63,7 +63,7 @@ def classfy(source=None, save_img=True):
     res_json = {
         "img_url": s3_access.get_public_url(client, file_path),
         "json_url": s3_access.get_public_url(client, json_file_name),
-        "text_arr": res_label,
+        #"text_arr": res_label,
     }
-    # file_path= /Imageclassfication/img.jpg
-    return output_file_name
+
+    return res_json

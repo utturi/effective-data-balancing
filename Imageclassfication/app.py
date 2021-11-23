@@ -11,9 +11,9 @@ app = Flask(__name__)
 
 @app.route("/",methods=["GET"])
 def main():
-    source = request.args["file_name"]
+    file_name = request.args["file_name"]
     with torch.no_grad():
-        response = classfication.classfy(source=source)
+        response = classfication.classfy(source='file_name')
     return response
 
 if __name__ == "__main__":
