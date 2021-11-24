@@ -20,6 +20,7 @@ def main():
 def file_upload():
     file = request.files["file"]
     file.save(secure_filename(file.filename))
+    return "200 OK"
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 import set_weights
 
-set_weights.get_files()
+# set_weights.get_files()
 
 import torch
 import detect_image
@@ -22,6 +22,7 @@ def main():
 def file_upload():
     file = request.files["file"]
     file.save(secure_filename(file.filename))
+    return "200 OK"
 
 
 if __name__ == "__main__":
