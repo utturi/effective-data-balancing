@@ -19,17 +19,22 @@ from .utils import (
     load_pretrained_weights,
     Swish,
     MemoryEfficientSwish,
-    calculate_output_image_size
+    calculate_output_image_size,
 )
 
 
 VALID_MODELS = (
-    'efficientnet-b0', 'efficientnet-b1', 'efficientnet-b2', 'efficientnet-b3',
-    'efficientnet-b4', 'efficientnet-b5', 'efficientnet-b6', 'efficientnet-b7',
-    'efficientnet-b8',
-
+    "efficientnet-b0",
+    "efficientnet-b1",
+    "efficientnet-b2",
+    "efficientnet-b3",
+    "efficientnet-b4",
+    "efficientnet-b5",
+    "efficientnet-b6",
+    "efficientnet-b7",
+    "efficientnet-b8",
     # Support the construction of 'efficientnet-l2' without pretrained weights
-    'efficientnet-l2'
+    "efficientnet-l2",
 )
 
 
@@ -52,12 +57,16 @@ class MBConvBlock(nn.Module):
         self._block_args = block_args
         self._bn_mom = 1 - global_params.batch_norm_momentum  # pytorch's difference from tensorflow
         self._bn_eps = global_params.batch_norm_epsilon
-        self.has_se = (self._block_args.se_ratio is not None) and (0 < self._block_args.se_ratio <= 1)
+        self.has_se = (self._block_args.se_ratio is not None) and (
+            0 < self._block_args.se_ratio <= 1
+        )
         self.id_skip = block_args.id_skip  # whether to use skip connection and drop connect
 
         # Expansion phase (Inverted Bottleneck)
         inp = self._block_args.input_filters  # number of input channels
-        oup = self._block_args.input_filters * self._block_args.expand_ratio  # number of output channels
+        oup = (
+            self._block_args.input_filters * self._block_args.expand_ratio
+        )  # number of output channels
         if self._block_args.expand_ratio != 1:
             Conv2d = get_same_padding_conv2d(image_size=image_size)
             self._expand_conv = Conv2d(in_channels=inp, out_channels=oup, kernel_size=1, bias=False)
@@ -69,22 +78,35 @@ class MBConvBlock(nn.Module):
         s = self._block_args.stride
         Conv2d = get_same_padding_conv2d(image_size=image_size)
         self._depthwise_conv = Conv2d(
-            in_channels=oup, out_channels=oup, groups=oup,  # groups makes it depthwise
-            kernel_size=k, stride=s, bias=False)
+            in_channels=oup,
+            out_channels=oup,
+            groups=oup,  # groups makes it depthwise
+            kernel_size=k,
+            stride=s,
+            bias=False,
+        )
         self._bn1 = nn.BatchNorm2d(num_features=oup, momentum=self._bn_mom, eps=self._bn_eps)
         image_size = calculate_output_image_size(image_size, s)
 
         # Squeeze and Excitation layer, if desired
         if self.has_se:
             Conv2d = get_same_padding_conv2d(image_size=(1, 1))
-            num_squeezed_channels = max(1, int(self._block_args.input_filters * self._block_args.se_ratio))
-            self._se_reduce = Conv2d(in_channels=oup, out_channels=num_squeezed_channels, kernel_size=1)
-            self._se_expand = Conv2d(in_channels=num_squeezed_channels, out_channels=oup, kernel_size=1)
+            num_squeezed_channels = max(
+                1, int(self._block_args.input_filters * self._block_args.se_ratio)
+            )
+            self._se_reduce = Conv2d(
+                in_channels=oup, out_channels=num_squeezed_channels, kernel_size=1
+            )
+            self._se_expand = Conv2d(
+                in_channels=num_squeezed_channels, out_channels=oup, kernel_size=1
+            )
 
         # Pointwise convolution phase
         final_oup = self._block_args.output_filters
         Conv2d = get_same_padding_conv2d(image_size=image_size)
-        self._project_conv = Conv2d(in_channels=oup, out_channels=final_oup, kernel_size=1, bias=False)
+        self._project_conv = Conv2d(
+            in_channels=oup, out_channels=final_oup, kernel_size=1, bias=False
+        )
         self._bn2 = nn.BatchNorm2d(num_features=final_oup, momentum=self._bn_mom, eps=self._bn_eps)
         self._swish = MemoryEfficientSwish()
 
@@ -123,7 +145,10 @@ class MBConvBlock(nn.Module):
         x = self._bn2(x)
 
         # Skip connection and drop connect
-        input_filters, output_filters = self._block_args.input_filters, self._block_args.output_filters
+        input_filters, output_filters = (
+            self._block_args.input_filters,
+            self._block_args.output_filters,
+        )
         if self.id_skip and self._block_args.stride == 1 and input_filters == output_filters:
             # The combination of skip connection and drop connect brings about stochastic depth.
             if drop_connect_rate:
@@ -162,8 +187,8 @@ class EfficientNet(nn.Module):
 
     def __init__(self, blocks_args=None, global_params=None):
         super().__init__()
-        assert isinstance(blocks_args, list), 'blocks_args should be a list'
-        assert len(blocks_args) > 0, 'block args must be greater than 0'
+        assert isinstance(blocks_args, list), "blocks_args should be a list"
+        assert len(blocks_args) > 0, "block args must be greater than 0"
         self._global_params = global_params
         self._blocks_args = blocks_args
 
@@ -190,7 +215,7 @@ class EfficientNet(nn.Module):
             block_args = block_args._replace(
                 input_filters=round_filters(block_args.input_filters, self._global_params),
                 output_filters=round_filters(block_args.output_filters, self._global_params),
-                num_repeat=round_repeats(block_args.num_repeat, self._global_params)
+                num_repeat=round_repeats(block_args.num_repeat, self._global_params),
             )
 
             # The first block needs to take care of stride and filter size increase.
@@ -199,7 +224,9 @@ class EfficientNet(nn.Module):
             if block_args.num_repeat > 1:  # modify block_args to keep same output size
                 block_args = block_args._replace(input_filters=block_args.output_filters, stride=1)
             for _ in range(block_args.num_repeat - 1):
-                self._blocks.append(MBConvBlock(block_args, self._global_params, image_size=image_size))
+                self._blocks.append(
+                    MBConvBlock(block_args, self._global_params, image_size=image_size)
+                )
                 # image_size = calculate_output_image_size(image_size, block_args.stride)  # stride = 1
 
         # Head
@@ -264,14 +291,14 @@ class EfficientNet(nn.Module):
                 drop_connect_rate *= float(idx) / len(self._blocks)  # scale drop connect_rate
             x = block(x, drop_connect_rate=drop_connect_rate)
             if prev_x.size(2) > x.size(2):
-                endpoints['reduction_{}'.format(len(endpoints) + 1)] = prev_x
+                endpoints["reduction_{}".format(len(endpoints) + 1)] = prev_x
             elif idx == len(self._blocks) - 1:
-                endpoints['reduction_{}'.format(len(endpoints) + 1)] = x
+                endpoints["reduction_{}".format(len(endpoints) + 1)] = x
             prev_x = x
 
         # Head
         x = self._swish(self._bn1(self._conv_head(x)))
-        endpoints['reduction_{}'.format(len(endpoints) + 1)] = x
+        endpoints["reduction_{}".format(len(endpoints) + 1)] = x
 
         return endpoints
 
@@ -346,8 +373,15 @@ class EfficientNet(nn.Module):
         return model
 
     @classmethod
-    def from_pretrained(cls, model_name, weights_path=None, advprop=False,
-                        in_channels=3, num_classes=1000, **override_params):
+    def from_pretrained(
+        cls,
+        model_name,
+        weights_path=None,
+        advprop=False,
+        in_channels=3,
+        num_classes=1000,
+        **override_params
+    ):
         """Create an efficientnet model according to name.
 
         Args:
@@ -375,8 +409,13 @@ class EfficientNet(nn.Module):
             A pretrained efficientnet model.
         """
         model = cls.from_name(model_name, num_classes=num_classes, **override_params)
-        load_pretrained_weights(model, model_name, weights_path=weights_path,
-                                load_fc=(num_classes == 1000), advprop=advprop)
+        load_pretrained_weights(
+            model,
+            model_name,
+            weights_path=weights_path,
+            load_fc=(num_classes == 1000),
+            advprop=advprop,
+        )
         model._change_in_channels(in_channels)
         return model
 
@@ -405,7 +444,7 @@ class EfficientNet(nn.Module):
             bool: Is a valid name or not.
         """
         if model_name not in VALID_MODELS:
-            raise ValueError('model_name should be one of: ' + ', '.join(VALID_MODELS))
+            raise ValueError("model_name should be one of: " + ", ".join(VALID_MODELS))
 
     def _change_in_channels(self, in_channels):
         """Adjust model's first convolution layer to in_channels, if in_channels not equals 3.
