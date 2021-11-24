@@ -1,14 +1,13 @@
-import torch
 import os
-import s3_access
 import json
+import torch
+import s3_access
 from PIL import Image
-from flask import Flask, request
 
 
 def detect(source=None):
     model = torch.load("weights/yolov5_detection_weights.pt")
-    model.conf = 0.6  # NMS confidence threshold
+    model.conf = 0.5  # NMS confidence threshold
     model.iou = 0.45
     if not source:
         source = "sample.jpg"
@@ -23,33 +22,33 @@ def detect(source=None):
     save_dict = {"result": {"width": w, "height": h, "objects": []}}
     save_labels = []
 
+    # pandas 형식에서 행 단위로 필요한 값 추출하여 json return 형식으로 구성
     for i in range(len(results_pandas)):
         out = results_pandas.loc[i]
         object_dict = {"attributes": {}}
-        object_dict["attributes"][out["name"]] = float(out["confidence"])
+        conf = round(float(out["confidence"]), 2)
+        object_dict["attributes"][out["name"]] = conf
         object_dict["left"] = out["xmin"]
         object_dict["top"] = out["ymin"]
         object_dict["right"] = out["xmax"]
         object_dict["bottom"] = out["ymax"]
         save_dict["result"]["objects"].append(object_dict)
-        save_labels.append(f"{out['name']}: {out['confidence']}")
+        save_labels.append(f"{out['name']}: {conf}")  # 화면의 text 필드에 띄울 label과 conf 값
 
-    # 6.파일경로와 확장자 분리 origin_name = /test/image0
+    # 파일경로와 확장자 분리 origin_name = "sample"
     origin_name, _ = os.path.splitext(source)
 
-    # 7.모델 결과 저장할 경로 지정 및 저장
+    # 모델 결과 저장 -- results 객체에서 입력 파일명을 그대로 사용하므로 폴더를 따로 지정
     results.save("output")
-    output_file_path = os.path.join("output", source)
+    output_file_path = os.path.join("output", source)  # 저장된 경로
 
-    # 8.json형식 아웃풋 저장 변수
-    # json_input_data = results.pandas().xyxy[0]
-
-    # 9.json 저장 파일 경로지정.
+    # json 저장 파일 경로지정
     json_file_name = origin_name + "_output.json"
-    # 10.json 파일로 저장
+    # json 파일 저장
     with open(json_file_name, "w", encoding="utf-8") as f:
         json.dump(save_dict, f, ensure_ascii=False)
 
+    # 결과 이미지와 json 파일 업로드 후 삭제
     client = s3_access.get_s3_client()
     s3_access.upload_file(client, output_file_path, source)
     s3_access.upload_file(client, json_file_name, json_file_name)
