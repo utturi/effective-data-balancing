@@ -1,22 +1,25 @@
-import torch
+import set_weights
+
+set_weights.get_files()
+
 import classfication
-
-# from torchvision import transforms
 from flask import Flask, request
-import os
+from werkzeug import secure_filename
 
-# from efficientnet_pytorch import EfficientNet
-# model = EfficientNet.from_pretrained('efficientnet-b0')
-# torch.save(model,'classfications')
 app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
 def main():
     file_name = request.args["file_name"]
-    with torch.no_grad():
-        response = classfication.classfy(source=file_name)
+    response = classfication.classfy(source=file_name)
     return response
+
+
+@app.route("/fileUpload", methods=["POST"])
+def file_upload():
+    file = request.files["file"]
+    file.save(secure_filename(file.filename))
 
 
 if __name__ == "__main__":
