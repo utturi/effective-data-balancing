@@ -1,4 +1,4 @@
-import UploadImage from './UploadImage';
+import UploadImage from '../containers/UploadImage'
 import SetImage from './SetImage';
 
 const Detection = () => {
@@ -27,6 +27,7 @@ const Detection = () => {
             </p>
             <button className="btn-q">샘플테스트</button>
             <SetImage />
+            {/* <UploadImage /> */}
           </div>
           <div className="box_com code">
             <ul className="code-select">
