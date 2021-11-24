@@ -36,14 +36,14 @@ const SetImage = () => {
     // });
   };
 
-  const setImageFromFile = ({ file, url }) => {
-    let reader = new FileReader();
+  // const setImageFromFile = ({ file, url }) => {
+  //   let reader = new FileReader();
 
-    reader.onload = function () {
-      url({ result: reader.result });
-    };
-    reader.readAsDataURL(file);
-  };
+  //   reader.onload = function () {
+  //     url({ result: reader.result });
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
 
   return (
     <>
@@ -58,13 +58,11 @@ const SetImage = () => {
         onChange={handleChangeFile}
       />
       {success && <UploadImage fileName={imageFileName} />}
-      {/* {console.log(imageFileName)} */}
       {/* {imageFile && (
         <div className="show-image">
           <img src={imageUrl} alt={imageFile.name} />
         </div>
       )} */}
-      {/* {console.log(imageFile)} */}
       {/* {imageFile && <img className="show-image" src={imageUrl} alt={imageFile.name} />} */}
     </>
   );

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Loading from '../components/Loading';
 
 function UploadImage({ fileName }) {
   const apiURL = 'http://localhost:5000';
@@ -25,13 +26,13 @@ function UploadImage({ fileName }) {
     fetchUsers();
   }, []);
 
-  if (loading) return <div>로딩중..</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!users) return null;
   return (
-    <ul>
+    <div className="show-image">
       <img src={users.img_url} />
-    </ul>
+    </div>
   );
 }
 

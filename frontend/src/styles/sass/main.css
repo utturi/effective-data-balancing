@@ -261,6 +261,8 @@ label.btn-q {
 }
 
 .show-image {
+  position: relative;
+  bottom: 420px;
   width: 658px;
   height: 678px;
 }
@@ -268,7 +270,7 @@ label.btn-q {
 .show-image img {
   width: 658px;
   height: 678px;
-  object-fit: contain;
+  object-fit: fill;
 }
 
 .box_com.code {
@@ -300,6 +302,12 @@ label.btn-q {
   border-radius: 4px;
   color: white;
   cursor: pointer;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: aqua;
 }
 
 html {
@@ -338,6 +346,7 @@ body {
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: fit-content;

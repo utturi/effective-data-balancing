@@ -1,4 +1,3 @@
-import UploadImage from '../containers/UploadImage'
 import SetImage from './SetImage';
 
 const Detection = () => {
@@ -9,15 +8,13 @@ const Detection = () => {
           <ul className="content-feature-inner-list">
             <li>AI TECH DEMO</li>
             <li print="here">IMAGE</li>
-            <li print="here">물체 검출</li>
+            <li print="here">자동차 번호 검출</li>
           </ul>
         </div>
       </section>
       <div className="content-detail">
-        <h1>물체 검출</h1>
-        <p>
-          Image Detection은 ~~
-        </p>
+        <h1>자동차 번호 검출</h1>
+        <p>Car Lisense Detection은 ~~</p>
         <div className="demo-visual">
           <div className="box_com image">
             <p>
@@ -27,7 +24,6 @@ const Detection = () => {
             </p>
             <button className="btn-q">샘플테스트</button>
             <SetImage />
-            {/* <UploadImage /> */}
           </div>
           <div className="box_com code">
             <ul className="code-select">

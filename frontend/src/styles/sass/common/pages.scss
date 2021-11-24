@@ -97,6 +97,8 @@ label.btn-q {
 }
 
 .show-image {
+    position: relative;
+    bottom: 420px;
     width: 658px;
     height: 678px;
 }
@@ -104,7 +106,7 @@ label.btn-q {
 .show-image img {
     width: 658px;
     height: 678px;
-    object-fit: contain;
+    object-fit: fill;
 }
 
 .box_com.code {
@@ -137,3 +139,9 @@ label.btn-q {
     color: white;
     cursor: pointer;
 }   
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: aqua;
+}
