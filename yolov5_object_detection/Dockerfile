@@ -1,10 +1,20 @@
-FROM brunneis/python:3.8.6-ubuntu-focal@sha256:fe3ac7d68746bebd16f7c7ccd93f049c19354d297673ce0c3d5c59cad890b7a2
-COPY /yolos5_object_detection/   /app
-WORKDIR /app
+FROM python:3.7
 
-RUN apt-get update
-RUN apt-get install -y python3-pip gfortran libopenblas-dev liblapack-dev
-RUN pip install --upgrade pip
-RUN pip3 install torch==1.10.0+cpu torchvision==0.11.1+cpu torchaudio==0.10.0+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
+# Install linux packages
+RUN apt update && apt install -y libgl1-mesa-glx libglib2.0-0 python3-pip gfortran libopenblas-dev liblapack-dev
 
-RUN pip install -r /test/requirements.txt
+# Install python dependencies
+COPY requirements.txt .
+RUN python -m pip install --upgrade pip
+RUN pip install --no-cache -r requirements.txt
+
+# Create working directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Copy contents
+COPY . /usr/src/app
+
+# Set environment variables
+ENV HOME=/usr/src/app
+CMD ["python3", "app.py"]
