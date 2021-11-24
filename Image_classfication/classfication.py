@@ -8,9 +8,9 @@ from torchvision import transforms
 
 def classfy(source=None):
 
-    model = torch.load("classfications")
+    model = torch.load("weights/classification_weights")
     if not source:
-        source = "img.jpg"
+        source = "sample/img.jpg"
 
     # Preprocess image
     tfms = transforms.Compose(
@@ -45,7 +45,8 @@ def classfy(source=None):
         save_dict["result"]["objects"].append(object_dict)
         save_labels.append(label)
 
-    origin_name, _ = os.path.splitext(source)
+    _, filename = os.path.split(source)
+    origin_name, _ = os.path.splitext(filename)
     json_file_name = origin_name + "_output.json"
     with open(json_file_name, "w", encoding="utf-8") as f:
         json.dump(save_dict, f, ensure_ascii=False)

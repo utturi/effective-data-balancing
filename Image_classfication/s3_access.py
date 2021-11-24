@@ -30,7 +30,8 @@ def upload_file(client, file_path, key_file):
     transfer.upload_file(
         file_path, os.getenv("BUCKET_NAME"), key_file, extra_args={"ACL": "public-read"}
     )
-    os.remove(file_path)
+    if not file_path.startswith("sample/"):
+        os.remove(file_path)
 
 
 def upload_weights_file(bucket, file_path, key_file):
