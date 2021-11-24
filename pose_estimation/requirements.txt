@@ -9,7 +9,7 @@ torch==1.7.0
 torchvision==0.8.1
 boto3
 thop  # FLOPS computation
-Werkzeug==0.15.4
+Werkzeug==0.15.5
 Flask==1.1.2
 Flask-RESTful==0.3.8
 requests
