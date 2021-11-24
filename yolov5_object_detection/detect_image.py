@@ -39,6 +39,7 @@ def detect(source=None):
     origin_name, _ = os.path.splitext(source)
 
     # 모델 결과 저장 -- results 객체에서 입력 파일명을 그대로 사용하므로 폴더를 따로 지정
+    os.makedirs("output/", exist_ok=True)
     results.save("output")
     output_file_path = os.path.join("output", source)  # 저장된 경로
 
