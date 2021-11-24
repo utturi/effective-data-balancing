@@ -1,12 +1,17 @@
 import axios from 'axios';
 import { useState } from 'react';
-import UploadImage from '../containers/UploadImage';
+import UploadImage from './UploadImage';
 
 const SetImage = () => {
   const apiURL = 'http://localhost:5000';
 
   const [imageFileName, setImageFileName] = useState(null); // 이미지 파일 그 자체
   const [success, setSuccess] = useState(false);
+
+  const sample = () => {
+    setSuccess(true);
+    setImageFileName('');
+  };
 
   const handleChangeFile = event => {
     if (event.target.files != null) {
@@ -26,27 +31,13 @@ const SetImage = () => {
           console.log(err.response.data);
         });
     }
-
-    // setImageFromFile({
-    //   file: event.target.files[0],
-    //   url: ({ result }) => {
-    //     setImageFile(event.target.files[0]);
-    //     setImageUrl(result);
-    //   },
-    // });
   };
-
-  // const setImageFromFile = ({ file, url }) => {
-  //   let reader = new FileReader();
-
-  //   reader.onload = function () {
-  //     url({ result: reader.result });
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
 
   return (
     <>
+      <button className="btn-q" onClick={sample}>
+        샘플테스트
+      </button>
       <label htmlFor="img_file" className="btn-q">
         파일 첨부
       </label>

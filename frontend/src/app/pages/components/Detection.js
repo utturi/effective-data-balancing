@@ -1,4 +1,4 @@
-import SetImage from './SetImage';
+import SetImage from '../containers/SetImage';
 
 const Detection = () => {
   return (
@@ -22,7 +22,6 @@ const Detection = () => {
               <br />
               샘플을 선택해 결과를 확인해 보세요.
             </p>
-            <button className="btn-q">샘플테스트</button>
             <SetImage />
           </div>
           <div className="box_com code">
