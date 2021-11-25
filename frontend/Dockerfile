@@ -7,6 +7,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json /app/package.json
 RUN yarn install
+RUN yarn upgrade
 
 # 앱 실행
 CMD ["yarn", "start"]

@@ -63,9 +63,7 @@ div.content-detail {
 }
 
 .box_com.image {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: inline-block;
     align-items: center;
     text-align: center;
     width: 658px;
@@ -75,17 +73,40 @@ div.content-detail {
 
 .box_com.image p {
     font-size: 3.5rem;
+    font-family: "NEXONLv1GothicLight";
     color: darkgray;
 }
 
 .btn-q {
-    width: 146px;
-    height: 46px;
+    width: 140px;
+    height: 45px;
     background-color: black;
     color: white;
     font-size: medium;
+    font-family: "NEXONLv1GothicLight";
+    padding: 10px;
     margin-top: 28px;
+    border: 0px;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+label.btn-q {
+    padding: 13px 37px;
+    margin-left: 20px;
+}
+
+.show-image {
+    position: relative;
+    bottom: 420px;
+    width: 658px;
+    height: 678px;
+}
+
+.show-image img {
+    width: 658px;
+    height: 678px;
+    object-fit: fill;
 }
 
 .box_com.code {
@@ -98,16 +119,57 @@ div.content-detail {
     display: flex;
     flex-direction: row;
     margin: 0;
-    padding: 16px 60px 17px 39px;
+    padding: 0px 0px 0px 39px;
     border-bottom: 1px solid black;
 }
 
-.code-select li {
-    display: flex;
-}
-
-.code-select li button {
-    font-size: 3rem;
+.text-selected-btn {
+    font-size: 3.5rem;
     border: 0;
     background-color: white;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.text-selected-btn-o {
+    font-size: 3.5rem;
+    border: 0;
+    background-color: white;
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+.reset-btn {
+    width: 60px;
+    height: 60px;
+    margin-left: auto;
+    background-color: rgba(0, 0, 0, 0.808);
+    border: 0;
+    cursor: pointer;
+}
+
+.box-result {
+    display: block;
+    height: 537px;
+    padding: 40px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.text-ground {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-design {
+    font-size: 5rem;
+}
+
+.full-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top:0; left: 0; bottom: 0; right: 0;
+    background: rgba(255, 255, 255, 0.8);
 }

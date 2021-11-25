@@ -3,7 +3,7 @@ import * as BsIcons from 'react-icons/bs';
 const BoxData = [
   {
     topic: 'IMAGE',
-    title: '물체검출',
+    title: '자동차번호검출',
     icon: '',
     path: '/imgDetection',
     cName: 'box-component',
