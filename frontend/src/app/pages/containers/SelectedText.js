@@ -3,7 +3,8 @@ import axios from 'axios';
 import Loading from '../components/Loading';
 
 const SelectedText = ({ fileName }) => {
-  const apiURL = 'http://localhost:5000';
+  //   const apiURL = 'http://localhost:5000';
+  var apiURL = process.env.PLATE_DETECTION_URL;
 
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);

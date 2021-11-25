@@ -5,7 +5,8 @@ import UploadImage from './UploadImage';
 import SelectedText from './SelectedText';
 
 const SetImage = () => {
-  const apiURL = 'http://localhost:5000';
+  // const apiURL = 'http://localhost:5000';
+  var apiURL = process.env.PLATE_DETECTION_URL;
 
   const [imageFileName, setImageFileName] = useState(null); // 이미지 파일 그 자체
   const [success, setSuccess] = useState(false);
