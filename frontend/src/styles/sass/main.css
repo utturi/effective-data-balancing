@@ -262,7 +262,7 @@ label.btn-q {
 
 .show-image {
   position: relative;
-  bottom: 520px;
+  bottom: 420px;
   width: 658px;
   height: 678px;
 }
@@ -291,6 +291,15 @@ label.btn-q {
   font-size: 3.5rem;
   border: 0;
   background-color: white;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.text-selected-btn-o {
+  font-size: 3.5rem;
+  border: 0;
+  background-color: white;
+  font-weight: 1000;
   cursor: pointer;
 }
 
@@ -311,13 +320,13 @@ label.btn-q {
   line-height: 1.5;
 }
 
-.tmp {
-  position: relative;
-  bottom: 300px;
-  left: 500px;
+.text-ground {
   display: flex;
   flex-direction: column;
-  right: 0;
+}
+
+.text-design {
+  font-size: 5rem;
 }
 
 .full-screen {

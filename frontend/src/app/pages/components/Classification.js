@@ -1,4 +1,3 @@
-import UploadImage from './UploadImage';
 
 const Classification = () => {
     return (

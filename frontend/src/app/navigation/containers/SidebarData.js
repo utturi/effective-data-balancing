@@ -8,7 +8,7 @@ const SidebarData = [
     cName: 'nav-text',
   },
   {
-    title: '물체검출',
+    title: '자동차번호검출',
     path: '/imgDetection',
     icon: <BsIcons.BsPersonBoundingBox />,
     cName: 'nav-text',

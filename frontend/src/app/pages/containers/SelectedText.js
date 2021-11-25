@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loading from '../components/Loading';
-import SelectedText from './SelectedText';
 
-function UploadImage({ fileName }) {
+const SelectedText = ({ fileName }) => {
   const apiURL = 'http://localhost:5000';
 
   const [users, setUsers] = useState(null);
@@ -28,16 +27,19 @@ function UploadImage({ fileName }) {
   }, []);
 
   if (loading) return <Loading />;
-  if (error) return <div>에러가 발생했습니다</div>;
+  //   if (error) return <div>에러가 발생했습니다</div>;
   if (!users) return null;
   return (
     <>
-      {/* <SelectedText info={users.text_arr} />; */}
-      <div className="show-image">
-        <img src={users.img_url} />
-      </div>
+      {users &&
+        users.text_arr.map((text, idx) => (
+          <div key={idx} className="text-ground">
+            <div className="text-design">{text}</div>
+          </div>
+        ))}
+      {console.log(users.text_arr)}
     </>
   );
-}
+};
 
-export default UploadImage;
+export default SelectedText;
