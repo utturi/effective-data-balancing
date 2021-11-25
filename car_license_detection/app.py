@@ -5,10 +5,11 @@ import set_weights
 import torch
 import detect_image
 from flask import Flask, request
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route("/", methods=["GET"])
 def main():
