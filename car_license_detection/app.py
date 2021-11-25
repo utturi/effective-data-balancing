@@ -1,6 +1,6 @@
 import set_weights
 
-# set_weights.get_files()
+set_weights.get_files()
 
 import torch
 import detect_image
@@ -10,6 +10,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 @app.route("/", methods=["GET"])
 def main():
