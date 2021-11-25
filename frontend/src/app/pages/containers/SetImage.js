@@ -49,12 +49,6 @@ const SetImage = () => {
         onChange={handleChangeFile}
       />
       {success && <UploadImage fileName={imageFileName} />}
-      {/* {imageFile && (
-        <div className="show-image">
-          <img src={imageUrl} alt={imageFile.name} />
-        </div>
-      )} */}
-      {/* {imageFile && <img className="show-image" src={imageUrl} alt={imageFile.name} />} */}
     </>
   );
 };
