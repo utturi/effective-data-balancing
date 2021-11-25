@@ -262,7 +262,7 @@ label.btn-q {
 
 .show-image {
   position: relative;
-  bottom: 420px;
+  bottom: 520px;
   width: 658px;
   height: 678px;
 }
@@ -283,31 +283,53 @@ label.btn-q {
   display: flex;
   flex-direction: row;
   margin: 0;
-  padding: 16px 60px 17px 39px;
+  padding: 0px 0px 0px 39px;
   border-bottom: 1px solid black;
 }
 
-.code-select li {
-  display: flex;
-}
-
-.code-select li button {
-  font-size: 3rem;
+.text-selected-btn {
+  font-size: 3.5rem;
   border: 0;
   background-color: white;
-}
-
-.input-file-button {
-  background-color: #FF6600;
-  border-radius: 4px;
-  color: white;
   cursor: pointer;
 }
 
-.container {
-  width: 100vw;
-  height: 100vh;
-  background-color: aqua;
+.reset-btn {
+  width: 60px;
+  height: 60px;
+  margin-left: auto;
+  background-color: rgba(0, 0, 0, 0.808);
+  border: 0;
+  cursor: pointer;
+}
+
+.box-result {
+  display: block;
+  height: 537px;
+  padding: 40px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.tmp {
+  position: relative;
+  bottom: 300px;
+  left: 500px;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+}
+
+.full-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 html {
