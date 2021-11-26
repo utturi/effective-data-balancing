@@ -4,8 +4,8 @@ import Loading from '../components/Loading';
 import SelectedText from './SelectedText';
 
 function UploadImage({ fileName }) {
-  // const apiURL = 'http://localhost:5000';
-  var apiURL = process.env.PLATE_DETECTION_URL;
+  var apiURL = 'http://localhost:5000';
+  // var apiURL = process.env.PLATE_DETECTION_URL;
 
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,6 @@ function UploadImage({ fileName }) {
   if (!users) return null;
   return (
     <>
-      {/* <SelectedText info={users.text_arr} />; */}
       <div className="show-image">
         <img src={users.img_url} />
       </div>

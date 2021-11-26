@@ -287,19 +287,18 @@ label.btn-q {
   border-bottom: 1px solid black;
 }
 
-.text-selected-btn {
-  font-size: 3.5rem;
-  border: 0;
-  background-color: white;
-  margin-left: 20px;
-  cursor: pointer;
-}
-
-.text-selected-btn-o {
+.selected-btn {
   font-size: 3.5rem;
   border: 0;
   background-color: white;
   font-weight: 1000;
+  cursor: pointer;
+}
+
+.unselected-btn {
+  font-size: 3.5rem;
+  border: 0;
+  background-color: white;
   cursor: pointer;
 }
 
