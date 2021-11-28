@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loading from '../components/Loading';
-import SelectedText from './SelectedText';
+
+export var FileTextData = null;
 
 function UploadImage({ fileName }) {
   var apiURL = 'http://localhost:5000';
@@ -19,6 +20,8 @@ function UploadImage({ fileName }) {
         const response = await axios.get(`${apiURL}/?file_name=${fileName}`);
 
         setUsers(response.data);
+        FileTextData = response.data;
+        console.log(FileTextData);
       } catch (err) {
         setError(err);
       }

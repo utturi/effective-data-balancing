@@ -28,13 +28,9 @@ const SetImage = () => {
 
   function SelectedItem() {
     if (selected == 'text') {
-      return (
-        <div className="box-result">{success && <SelectedText fileName={imageFileName} />}</div>
-      );
+      return <div className="box-result">{success && <SelectedText />}</div>;
     } else if (selected == 'json') {
-      return (
-        <div className="box-result">{success && <SelectedJson fileName={imageFileName} />}</div>
-      );
+      return <div className="box-result">{success && <SelectedJson />}</div>;
     }
   }
 

@@ -1,5 +1,7 @@
+import { FileTextData } from './UploadImage';
+
 const SelectedJson = () => {
-  return <></>;
+  return <>{FileTextData && FileTextData.json_url}</>;
 };
 
 export default SelectedJson;
