@@ -25,7 +25,7 @@ function Navbar() {
               <img id="main-logo" src={mainLogo}></img>
             </button>
           </Link>
-          <img id="github" src={github}></img>
+          {/* <img id="github" src={github}></img> */}
         </div>
       </IconContext.Provider>
       <IconContext.Provider value={{ color: '#FFF' }}>

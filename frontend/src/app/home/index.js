@@ -1,7 +1,7 @@
-import AiContainer from './containers/AiContainer';
+import BoxList from './components/BoxList';
 
 const index = () => {
-  return <AiContainer />;
+  return <BoxList />;
 };
 
 export default index;
