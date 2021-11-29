@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loading from '../components/Loading';
-import SelectedText from './SelectedText';
+
+export var FileTextData = null;
 
 function UploadImage({ fileName }) {
-  // const apiURL = 'http://localhost:5000';
-  var apiURL = process.env.PLATE_DETECTION_URL;
+  var apiURL = 'http://localhost:5000';
+  // var apiURL = process.env.PLATE_DETECTION_URL;
 
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,8 @@ function UploadImage({ fileName }) {
         const response = await axios.get(`${apiURL}/?file_name=${fileName}`);
 
         setUsers(response.data);
+        FileTextData = response.data;
+        // console.log(FileTextData);
       } catch (err) {
         setError(err);
       }
@@ -33,7 +36,6 @@ function UploadImage({ fileName }) {
   if (!users) return null;
   return (
     <>
-      {/* <SelectedText info={users.text_arr} />; */}
       <div className="show-image">
         <img src={users.img_url} />
       </div>

@@ -9,7 +9,7 @@ const SidebarData = [
   },
   {
     title: '자동차번호검출',
-    path: '/imgDetection',
+    path: '/imgCarLicense',
     icon: <BsIcons.BsPersonBoundingBox />,
     cName: 'nav-text',
   },
@@ -20,8 +20,14 @@ const SidebarData = [
     cName: 'nav-text',
   },
   {
-    title: '',
-    path: '/',
+    title: '자세추정',
+    path: '/imgPose',
+    icon: <BsIcons.BsEnvelopeFill />,
+    cName: 'nav-text',
+  },
+  {
+    title: '물체분석',
+    path: '/imgDetection',
     icon: <BsIcons.BsEnvelopeFill />,
     cName: 'nav-text',
   },

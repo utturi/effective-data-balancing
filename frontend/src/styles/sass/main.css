@@ -1,13 +1,29 @@
 .list-box {
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 90%;
   height: 350px;
   padding-left: 0px;
-  margin-top: 120px;
+  margin-top: 20px;
+}
+
+.list-box-sub {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  height: 350px;
+  padding-left: 0px;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 .list-box li {
+  display: inline-flex;
+  box-sizing: border-box;
+  margin: 0 10px 0 10px;
+}
+
+.list-box-sub li {
   display: inline-flex;
   box-sizing: border-box;
   margin: 0 10px 0 10px;
@@ -58,6 +74,13 @@
   font-size: 7rem;
 }
 
+.box-content .icon {
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  height: 100%;
+}
+
 .explain-coponent {
   display: flex;
   justify-content: center;
@@ -99,9 +122,17 @@
   background: none;
 }
 
-#main-logo {
+.main-logo-btn {
+  margin: 0 0 5px 20px;
+  padding: 0;
+  background-color: #FFF;
+  border: 0;
+  cursor: pointer;
+}
+
+.navbar #main-logo {
   width: 40rem;
-  margin: 0 0 7px 20px;
+  margin: 0;
 }
 
 #github {
@@ -190,6 +221,7 @@ div.content-feature-inner {
   margin: 0;
   padding-left: 0;
   font-size: medium;
+  color: #C4C4C4;
 }
 
 li[print=here]::before {
@@ -287,19 +319,18 @@ label.btn-q {
   border-bottom: 1px solid black;
 }
 
-.text-selected-btn {
-  font-size: 3.5rem;
-  border: 0;
-  background-color: white;
-  margin-left: 20px;
-  cursor: pointer;
-}
-
-.text-selected-btn-o {
+.selected-btn {
   font-size: 3.5rem;
   border: 0;
   background-color: white;
   font-weight: 1000;
+  cursor: pointer;
+}
+
+.unselected-btn {
+  font-size: 3.5rem;
+  border: 0;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -326,7 +357,7 @@ label.btn-q {
 }
 
 .text-design {
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .full-screen {

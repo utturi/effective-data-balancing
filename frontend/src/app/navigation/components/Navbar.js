@@ -20,8 +20,12 @@ function Navbar() {
           <Link to="#" className="menu-bars">
             <BsGridFill onClick={showSidebar} />
           </Link>
-          <img id="main-logo" src={mainLogo}></img>
-          <img id="github" src={github}></img>
+          <Link to="/">
+            <button className="main-logo-btn">
+              <img id="main-logo" src={mainLogo}></img>
+            </button>
+          </Link>
+          {/* <img id="github" src={github}></img> */}
         </div>
       </IconContext.Provider>
       <IconContext.Provider value={{ color: '#FFF' }}>

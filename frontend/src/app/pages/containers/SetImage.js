@@ -3,13 +3,15 @@ import axios from 'axios';
 import { RiRefreshLine } from 'react-icons/ri';
 import UploadImage from './UploadImage';
 import SelectedText from './SelectedText';
+import SelectedJson from './SelectedJson';
 
 const SetImage = () => {
-  // const apiURL = 'http://localhost:5000';
-  var apiURL = process.env.PLATE_DETECTION_URL;
+  var apiURL = 'http://localhost:5000';
+  // var apiURL = process.env.PLATE_DETECTION_URL;
 
   const [imageFileName, setImageFileName] = useState(null); // 이미지 파일 그 자체
   const [success, setSuccess] = useState(false);
+  const [selected, setSelected] = useState('text');
 
   const reset = () => {
     window.location.reload();
@@ -19,6 +21,18 @@ const SetImage = () => {
     setSuccess(true);
     setImageFileName('');
   };
+
+  const onClick = event => {
+    setSelected(event.target.id);
+  };
+
+  function SelectedItem() {
+    if (selected == 'text') {
+      return <div className="box-result">{success && <SelectedText />}</div>;
+    } else if (selected == 'json') {
+      return <div className="box-result">{success && <SelectedJson />}</div>;
+    }
+  }
 
   const handleChangeFile = event => {
     if (event.target.files != null) {
@@ -65,13 +79,26 @@ const SetImage = () => {
       </div>
       <div className="box_com code">
         <div className="code-select">
-          <button className="text-selected-btn-o">TEXT</button>
-          <button className="text-selected-btn">JSON</button>
+          <button
+            id="text"
+            className={selected == 'text' ? 'selected-btn' : 'unselected-btn'}
+            onClick={onClick}
+          >
+            TEXT
+          </button>
+          <button
+            id="json"
+            className={selected == 'json' ? 'selected-btn' : 'unselected-btn'}
+            style={{ marginLeft: '20px' }}
+            onClick={onClick}
+          >
+            JSON
+          </button>
           <button className="reset-btn" onClick={reset}>
             <RiRefreshLine size="40" color="#FFF" />
           </button>
         </div>
-        <div className="box-result">{success && <SelectedText fileName={imageFileName} />}</div>
+        <SelectedItem />
       </div>
     </div>
   );
