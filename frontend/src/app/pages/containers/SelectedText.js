@@ -1,4 +1,5 @@
 import { FileTextData } from './UploadImage';
+import { useState, useEffect } from 'react';
 
 const SelectedText = () => {
   return (

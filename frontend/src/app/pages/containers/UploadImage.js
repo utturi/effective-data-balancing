@@ -21,7 +21,7 @@ function UploadImage({ fileName }) {
 
         setUsers(response.data);
         FileTextData = response.data;
-        console.log(FileTextData);
+        // console.log(FileTextData);
       } catch (err) {
         setError(err);
       }
