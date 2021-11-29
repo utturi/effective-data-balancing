@@ -221,6 +221,7 @@ div.content-feature-inner {
   margin: 0;
   padding-left: 0;
   font-size: medium;
+  color: #C4C4C4;
 }
 
 li[print=here]::before {

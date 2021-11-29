@@ -6,7 +6,7 @@ const BoxData1 = [
     topic: 'IMAGE',
     title: '자동차번호검출',
     icon: <AiFillCar size="180" />,
-    path: '/imgCarLisense',
+    path: '/imgCarLicense',
     cName: 'box-component',
   },
   {
